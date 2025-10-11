@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/icon-button-done.png</file>
+        <file>icons/icon-button-delete.png</file>
+        <file>icons/icon-button-add.png</file>
+        <file>icons/icon-search.png</file>
+        <file>icons/icon-status-all.png</file>
+        <file>icons/icon-status-planned.png</file>
+        <file>icons/icon-sort-alphabet.png</file>
+        <file>icons/icon-sort-date.png</file>
+        <file>icons/icon-status-complete.png</file>
+        <file>icons/icon-status-overdue.png</file>
+        <file>icons/icon-status-actual.png</file>
+        <file>icons/icon-button-close.png</file>
+        <file>icons/icon-button-maximize.png</file>
+        <file>icons/icon-button-minimize.png</file>
+        <file>icons/icon-top.png</file>
+    </qresource>
+</RCC>
