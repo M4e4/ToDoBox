@@ -35,8 +35,6 @@ private:
 
     void closeEvent(QCloseEvent* event) override;
     void keyPressEvent(QKeyEvent* event) override;
-
-    void enabledMouseTracking(QWidget* widget);
 };
 
 #endif // MAINWIDGET_H

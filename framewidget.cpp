@@ -1,6 +1,9 @@
 #include "framewidget.h"
 #include "mainwidget.h"
 
+#include <QWindowStateChangeEvent>
+#include <QTimer>
+
 
 
 
@@ -8,6 +11,9 @@
 FrameWidget::FrameWidget(QWidget* parent) : QWidget{parent}
 {
     setAttribute(Qt::WA_MouseTracking, true);
+
+    normalSize = size();
+    normalPosition = pos();
 }
 
 
@@ -57,6 +63,8 @@ void FrameWidget::mouseMoveEvent(QMouseEvent *event)
         move(event->globalPosition().toPoint() - offsetPos);
         event->accept();
     }
+
+    normalPosition = pos();
 }
 
 
@@ -80,6 +88,41 @@ void FrameWidget::leaveEvent(QEvent *event)
     Q_UNUSED(event);
 
     unsetCursor();
+}
+
+
+
+
+void FrameWidget::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::WindowStateChange)
+    {
+        QWindowStateChangeEvent *stateEvent = static_cast<QWindowStateChangeEvent *>(event);
+
+        Qt::WindowStates oldState = stateEvent->oldState();
+        Qt::WindowStates newState = windowState();
+
+        if ((oldState & Qt::WindowMaximized) && (newState & Qt::WindowMinimized))
+        {
+            wasMaximized = true;
+        }
+
+        else if ((oldState & Qt::WindowMinimized) && !(newState & Qt::WindowMinimized) && wasMaximized)
+        {
+            QTimer::singleShot(0, this, [this](){ showMaximized(); });
+        }
+
+        else if ((oldState & Qt::WindowMaximized) &&
+                 !(newState & Qt::WindowMaximized) &&
+                 !(newState & Qt::WindowMinimized))
+        {
+            resize(normalSize);
+            move(normalPosition);
+            wasMaximized = false;
+        }
+    }
+
+    QWidget::changeEvent(event);
 }
 
 
@@ -181,4 +224,15 @@ void FrameWidget::resizeWindow(const QPoint &position)
     }
 
     setGeometry(geom);
+
+    normalSize = size();
 }
+
+
+
+
+void FrameWidget::updateNormalSize() { normalSize = size(); }
+
+QSize FrameWidget::getNormalSize() { return normalSize; }
+
+QPoint FrameWidget::getNormalPosition() { return normalPosition; }

@@ -15,5 +15,6 @@
         <file>icons/icon-button-maximize.png</file>
         <file>icons/icon-button-minimize.png</file>
         <file>icons/icon-top.png</file>
+        <file>Fonts/Inter_28pt-Light.ttf</file>
     </qresource>
 </RCC>

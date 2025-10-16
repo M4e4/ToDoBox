@@ -9,8 +9,6 @@
 #include <QDateEdit>
 #include <QTimer>
 
-#include <QCalendarWidget>
-
 
 
 
@@ -91,17 +89,17 @@ EditingWidget::EditingWidget(ListItem *list, QListWidgetItem *item, QWidget *par
     // Button done.
     QPushButton* bDone {new QPushButton(QIcon(":/icons/icon-button-done.png"),"")};
     bDone->setIconSize(QSize(12,12));
-    bDone->setStyleSheet(R"(QPushButton
-                            {
-                                background: #6a6a6a;
-                                color: white;
-                                border: none;
-                            }
-                            QPushButton:disabled
-                            {
-                                background: #555555;
-                            }
-                            )");
+    bDone->setStyleSheet(R"(
+    QPushButton
+    {
+        background: #777;
+        color: white;
+        border: none;
+    }
+    QPushButton:disabled
+    {
+        background: #555555;
+    })");
     bDone->setFixedSize(45,30);
     bDone->setEnabled(!title->text().isEmpty());
 
@@ -125,15 +123,15 @@ EditingWidget::EditingWidget(ListItem *list, QListWidgetItem *item, QWidget *par
 
     // Button delete.
     QPushButton* bDelete {new QPushButton(QIcon(":/icons/icon-button-delete.png"),"")};
-    bDelete->setStyleSheet(R"(QPushButton
-                            {
-                                background: #c05555;
-                                color: white;
-                                border: none;
-                                border-top-right-radius: 5px;
-                                border-bottom-right-radius: 5px;
-                            }
-                            )");
+    bDelete->setStyleSheet(R"(
+    QPushButton
+    {
+        background: #d04040;
+        color: white;
+        border: none;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    })");
     bDelete->setFixedSize(45,30);
 
     connect(bDelete, &QPushButton::clicked, this, [this, list, item]()

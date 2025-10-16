@@ -3,6 +3,7 @@
 #include "approvedwidget.h"
 #include "editingwidget.h"
 #include "topwidget.h"
+#include "framewidget.h"
 
 #include <QLineEdit>
 #include <QComboBox>
@@ -12,8 +13,7 @@
 #include <QHBoxLayout>
 #include <QApplication>
 #include <QMouseEvent>
-
-#include <QPalette>
+#include <QTimer>
 
 
 
@@ -23,10 +23,12 @@ MainWidget::MainWidget(QWidget *parent) : QWidget{parent}
 {
     setAttribute(Qt::WA_StyledBackground, true);
     setStyleSheet("MainWidget {background: #2a2a2a; border-radius: 10px;}");
+
     setupUI();
     setupConnections();
 
-    enabledMouseTracking(this);
+    topWidget->setMouseTracking(true);
+    this->setMouseTracking(true);
 }
 
 
@@ -64,27 +66,25 @@ void MainWidget::setupUI()
     listItem->setDragDropMode(QAbstractItemView::InternalMove);
 
     // Filter|Sort style.
-    QString comboBoxStyle
+    QString comboBoxStyle {
+    R"(QComboBox
     {
-        R"(QComboBox
-        {
-            color: white;
-            background: #555555;
-            border-radius: 5px;
-            padding-left: 15px;
-        }
-        QComboBox::drop-down
-        {
-            border: none;
-        }
-        QComboBox QAbstractItemView
-        {
-            background: #555555;
-            color: white;
-            border-radius: 5px;
-            padding: 5px;
-        })"
-    };
+        color: white;
+        background: #555555;
+        border-radius: 5px;
+        padding-left: 15px;
+    }
+    QComboBox::drop-down
+    {
+        border: none;
+    }
+    QComboBox QAbstractItemView
+    {
+        background: #555555;
+        color: white;
+        border-radius: 5px;
+        padding: 5px;
+    })"};
 
     // Filter.
     cFilter = new QComboBox;
@@ -112,7 +112,15 @@ void MainWidget::setupUI()
 
     // Button add (+).
     bAdd = new QPushButton(QIcon(":/icons/icon-button-add.png"), "");
-    bAdd->setStyleSheet("background: #555555; border-radius: 5px;");
+    bAdd->setStyleSheet(R"(
+    QPushButton
+    {
+        background: #555555; border-radius: 5px;
+    }
+    QPushButton:hover
+    {
+        background: #666666;
+    })");
     bAdd->setMinimumHeight(itemHeight);
 
 
@@ -148,52 +156,74 @@ void MainWidget::setupUI()
 void MainWidget::setupConnections()
 {
     // Top - minimize.
-    connect(topWidget, &TopWidget::buttonMinimize, this, [this]()
+    connect(topWidget, &TopWidget::pushMinimize, this, [this]()
     {
         parentWidget()->showMinimized();
     });
 
     // Top - maximize.
-    connect(topWidget, &TopWidget::buttonMaximize, this, [this]()
+    connect(topWidget, &TopWidget::pushMaximize, this, [this]()
     {
         QWidget* widget {parentWidget()};
         QLayout* layout {widget->layout()};
 
         if (widget->isMaximized())
         {
-            layout->setContentsMargins(20,20,20,20);
-            widget->showNormal();
+            QTimer::singleShot(0, widget, [widget](){ widget->showNormal(); });
 
-            topWidget->setStyleSheet(R"(TopWidget
-                {
-                    background: #444;
-                    border-top-left-radius: 10px;
-                    border-top-right-radius: 10px;
-                    border-bottom-left-radius: 0px;
-                    border-bottom-right-radius: 0px;
-                }
-                )");
+            layout->setContentsMargins(20,20,20,20);
+
+            // Update borders.
+            topWidget->setStyleSheet(R"(
+            TopWidget
+            {
+                background: #444;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+            }
+            )");
+            topWidget->buttonClose->setStyleSheet(R"(
+            QPushButton
+            {
+                background: transparent;
+                border: none;
+            }
+            QPushButton:hover
+            {
+                background: #444;
+                border-top-right-radius: 10px;
+            })");
 
             setStyleSheet("MainWidget {background: #2a2a2a; border-radius: 10px;}");
         }
         else
         {
-            layout->setContentsMargins(0,0,0,0);
-            widget->showMaximized();
+            QTimer::singleShot(0, widget, [widget](){ widget->showMaximized(); });
 
-            topWidget->setStyleSheet(R"(TopWidget
-                {
-                    background: #444;
-                    border-radius: 0px;
-                }
-                )");
+            layout->setContentsMargins(0,0,0,0);
+
+            // Update borders.
+            topWidget->setStyleSheet("TopWidget {background: #444; border-radius: 0px;}");
+            topWidget->buttonClose->setStyleSheet(R"(
+            QPushButton
+            {
+                background: transparent;
+                border: none;
+            }
+            QPushButton:hover
+            {
+                background: #444;
+                border-top-right-radius: 0px;
+            })");
 
             setStyleSheet("MainWidget {background: #2a2a2a; border-radius: 0px;}");
         }
     });
 
     // Top - close.
-    connect(topWidget, &TopWidget::buttonClose, this, [this]()
+    connect(topWidget, &TopWidget::pushClose, this, [this]()
     {
         listItem->save();
         qApp->quit();
@@ -252,19 +282,4 @@ void MainWidget::closeEvent(QCloseEvent* event)
 void MainWidget::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) bAdd->click();
-}
-
-
-
-
-
-void MainWidget::enabledMouseTracking(QWidget *widget)
-{
-    if (!widget) return;
-
-    widget->setMouseTracking(true);
-
-    const QList<QWidget*> childList {widget->findChildren<QWidget*>()};
-
-    for (QWidget* childWidget : childList) enabledMouseTracking(childWidget);
 }

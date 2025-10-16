@@ -57,6 +57,10 @@ ListItem::ListItem() :
             background: #555555;
             border-radius: 5px;
         }
+        QScrollBar::handle:hover
+        {
+            background: #666666;
+        }
 
         )");
 }
@@ -91,7 +95,8 @@ void ListItem::setSelectedStyle(QListWidgetItem* item, bool selected)
 {
     if(!item) return;
 
-    const QString style = selected ? "ApprovedWidget {background: #555555; border-radius: 5px;}" : "ApprovedWidget {background: #444; border-radius: 5px;}";
+    const QString style = selected ? "ApprovedWidget {background: #555555; border-radius: 5px;}" :
+                                     "ApprovedWidget {background: #444; border-radius: 5px;}";
 
     ApprovedWidget* widget {getItemWidget<ApprovedWidget*>(this, item)};
 

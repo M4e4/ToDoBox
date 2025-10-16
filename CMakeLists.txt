@@ -18,9 +18,11 @@ add_executable(ToDoBox
   approvedwidget.h approvedwidget.cpp
   editingwidget.h editingwidget.cpp
   listitem.h listitem.cpp
-  Resources.qrc
+
   topwidget.h topwidget.cpp
   framewidget.h framewidget.cpp
+  Resources.qrc
+
 
 
 

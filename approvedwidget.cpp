@@ -5,8 +5,6 @@
 #include <QCheckBox>
 #include <QLabel>
 
-#include <QDate>
-
 
 
 
@@ -38,10 +36,10 @@ ApprovedWidget::ApprovedWidget (ListItem *list, QListWidgetItem *item, QWidget *
 
     // Label title.
     QLabel* tTitle {new QLabel(item->data(toInt(Role::TITLE)).toString())};
-    tTitle->setStyleSheet("color: white");
+    tTitle->setStyleSheet("color: white;");
     // Label date.
     QLabel* tDate {new QLabel(item->data(toInt(Role::DATE)).toString())};
-    tDate->setStyleSheet("color: white");
+    tDate->setStyleSheet("color: white;");
     tDate->setContentsMargins(0,0,10,0);
 
 

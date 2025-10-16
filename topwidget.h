@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QMouseEvent>
 
 
 
@@ -14,10 +15,16 @@ class TopWidget : public QWidget
 public:
     TopWidget();
 
+    QPushButton* buttonClose;
+
+private:
+    void mouseDoubleClickEvent(QMouseEvent* event) override;
+
 signals:
-    void buttonClose();
-    void buttonMinimize();
-    void buttonMaximize();
+    void pushClose();
+    void pushMinimize();
+    void pushMaximize();
+
 };
 
 #endif // TOPWIDGET_H
