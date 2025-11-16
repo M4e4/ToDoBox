@@ -24,11 +24,15 @@ enum class ResizeRegion
     COUNT
 };
 
+
+
+
+
 class FrameWidget : public QWidget
 {
     Q_OBJECT
 public:
-    FrameWidget(QWidget* parent = nullptr);
+    FrameWidget(QWidget *parent = nullptr);
 
     void updateNormalSize();
 
@@ -60,5 +64,9 @@ private:
     QSize normalSize;
     QPoint normalPosition;
 };
+
+
+
+
 
 #endif // FRAMEWIDGET_H

@@ -9,11 +9,13 @@
 #include <QDateEdit>
 #include <QTimer>
 
+#include "utils/toInt.h"
 
 
 
 
-EditingWidget::EditingWidget(ListItem *list, QListWidgetItem *item, QWidget *parent) : QWidget{parent}
+
+EditingWidget::EditingWidget(ListTask *list, QListWidgetItem *item, QWidget *parent) : QWidget{parent}
 {
     setFixedHeight(itemHeight);
     setAttribute(Qt::WA_StyledBackground, true);

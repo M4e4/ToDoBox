@@ -1,5 +1,5 @@
-#ifndef LISTITEM_H
-#define LISTITEM_H
+#ifndef LISTTASK_H
+#define LISTTASK_H
 
 #include <QListWidget>
 #include <QString>
@@ -45,13 +45,17 @@ enum class Role
     COUNT
 };
 
-class ListItem : public QListWidget
+
+
+
+
+class ListTask : public QListWidget
 {
     Q_OBJECT
 public:
-    ListItem();
+    ListTask();
 
-    void newItem();
+    void newTask();
     void setSelectedStyle(QListWidgetItem* item, bool selected);
     void filter(QString text, Status status);
     void sort(int type);
@@ -69,15 +73,13 @@ private:
 
 
 template<typename T>
-constexpr int toInt(const T cast)
-{
-    return static_cast<int>(cast);
-}
-
-template<typename T>
 T getItemWidget(QListWidget* list, QListWidgetItem* item)
 {
     return qobject_cast<T>(list->itemWidget(item));
 }
 
-#endif // LISTITEM_H
+
+
+
+
+#endif // LISTTASK_H

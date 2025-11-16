@@ -1,5 +1,5 @@
-#include "framewidget.h"
-#include "mainwidget.h"
+#include "frameWidget.h"
+#include "mainWIdget.h"
 
 #include <QApplication>
 #include <QVBoxLayout>
@@ -21,8 +21,8 @@ int main(int argc, char *argv[])
     MainWidget* mainWidget {new MainWidget};
     QGraphicsDropShadowEffect* shadowEffect {new QGraphicsDropShadowEffect(mainWidget)};
 
-    QSettings settings {"M4e4", "ToDoBox"};
-    QVariant size {settings.value("window/size")};
+    QSettings settings(QSettings::NativeFormat, QSettings::UserScope, "M4e4", "ToDoBox");
+    QVariant size {settings.value("window/window_size")};
 
     // Set style.
     app.setStyle("Fusion");
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     // Save settings.
     QObject::connect(&app, &QApplication::aboutToQuit, frameWidget, [&settings, frameWidget]()
     {
-        settings.setValue("window/size", frameWidget->getNormalSize());
+        settings.setValue("window/window_size", frameWidget->getNormalSize());
     });
 
     return app.exec();

@@ -1,4 +1,4 @@
-#include "listitem.h"
+#include "listTask.h"
 #include "editingwidget.h"
 #include "approvedwidget.h"
 
@@ -9,22 +9,30 @@
 #include <QFile>
 #include <QTimer>
 
+#include "utils/toInt.h"
 
 
 
 
-ListItem::ListItem() :
-    icons {
-    QIcon(":/icons/icon-status-actual.png"),
-    QIcon(":/icons/icon-status-overdue.png"),
-    QIcon(":/icons/icon-status-planned.png"),
-    QIcon(":/icons/icon-status-complete.png")}
+
+ListTask::ListTask()
+    : icons
+    {
+        QIcon(":/icons/icon-status-actual.png"),
+        QIcon(":/icons/icon-status-overdue.png"),
+        QIcon(":/icons/icon-status-planned.png"),
+        QIcon(":/icons/icon-status-complete.png")
+    }
 {
+    setMouseTracking(true);
+
     load();
 
     QTimer::singleShot(0, this, [this](){ scrollToBottom(); });
 
-    setStyleSheet(R"(ListItem
+    setStyleSheet(
+    R"(
+        ListItem
         {
             background: transparent;
             border: none;
@@ -61,15 +69,14 @@ ListItem::ListItem() :
         {
             background: #666666;
         }
-
-        )");
+    )");
 }
 
 
 
 
 
-void ListItem::newItem()
+void ListTask::newTask()
 {
     QListWidgetItem* item {new QListWidgetItem};
 
@@ -91,7 +98,7 @@ void ListItem::newItem()
 
 
 
-void ListItem::setSelectedStyle(QListWidgetItem* item, bool selected)
+void ListTask::setSelectedStyle(QListWidgetItem* item, bool selected)
 {
     if(!item) return;
 
@@ -107,7 +114,7 @@ void ListItem::setSelectedStyle(QListWidgetItem* item, bool selected)
 
 
 
-void ListItem::filter(QString text, Status status)
+void ListTask::filter(QString text, Status status)
 {
     for (int i{}; i < count(); ++i)
     {
@@ -140,7 +147,7 @@ void ListItem::filter(QString text, Status status)
 
 
 
-void ListItem::sort(int type)
+void ListTask::sort(int type)
 {
     struct itemEntry
     {
@@ -231,7 +238,7 @@ void ListItem::sort(int type)
 
 
 
-void ListItem::save()
+void ListTask::save()
 {
     QFile file("userData.bin");
 
@@ -258,7 +265,7 @@ void ListItem::save()
 
 
 
-void ListItem::load()
+void ListTask::load()
 {
     QFile file("userData.bin");
 
@@ -307,4 +314,7 @@ void ListItem::load()
 
 
 
-QIcon ListItem::getIcon(Status status) { return icons[toInt(status)]; }
+QIcon ListTask::getIcon(Status status)
+{
+    return icons[toInt(status)];
+}

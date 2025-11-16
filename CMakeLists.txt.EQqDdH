@@ -15,10 +15,10 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 add_executable(ToDoBox
     Resources.qrc
     src/main.cpp
-    src/frameWidget.h src/frameWidget.cpp
+    src/framewidget.h src/framewidget.cpp
     src/mainWidget.h src/mainWidget.cpp
-    src/titleWidget.h src/titleWidget.cpp
-    src/listTask.h src/listTask.cpp
+    src/titlewidget.h src/titlewidget.cpp
+    src/listitem.h src/listitem.cpp
     src/editingwidget.h src/editingwidget.cpp
     src/approvedwidget.h src/approvedwidget.cpp
     src/ui/contentWidgetUI.h src/ui/contentWidgetUI.cpp
@@ -28,7 +28,6 @@ add_executable(ToDoBox
     src/contentWidget.h src/contentWidget.cpp
     src/ui/mainWidgetUI.h src/ui/mainWidgetUI.cpp
     src/manager/mainWidgetManager.h src/manager/mainWidgetManager.cpp
-    src/utils/toInt.h
 )
 
 if (WIN32)

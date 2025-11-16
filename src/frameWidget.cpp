@@ -1,8 +1,9 @@
-#include "framewidget.h"
-#include "mainwidget.h"
+#include "frameWidget.h"
+#include "mainWIdget.h"
 
-#include <QWindowStateChangeEvent>
 #include <QTimer>
+
+#include "utils/toInt.h"
 
 
 
@@ -113,8 +114,8 @@ void FrameWidget::changeEvent(QEvent *event)
         }
 
         else if ((oldState & Qt::WindowMaximized) &&
-                 !(newState & Qt::WindowMaximized) &&
-                 !(newState & Qt::WindowMinimized))
+                !(newState & Qt::WindowMaximized) &&
+                !(newState & Qt::WindowMinimized))
         {
             resize(normalSize);
             move(normalPosition);
@@ -231,8 +232,17 @@ void FrameWidget::resizeWindow(const QPoint &position)
 
 
 
-void FrameWidget::updateNormalSize() { normalSize = size(); }
+void FrameWidget::updateNormalSize()
+{
+    normalSize = size();
+}
 
-QSize FrameWidget::getNormalSize() { return normalSize; }
+QSize FrameWidget::getNormalSize()
+{
+    return normalSize;
+}
 
-QPoint FrameWidget::getNormalPosition() { return normalPosition; }
+QPoint FrameWidget::getNormalPosition()
+{
+    return normalPosition;
+}

@@ -5,12 +5,15 @@
 #include <QCheckBox>
 #include <QLabel>
 
+#include "utils/toInt.h"
 
 
 
 
-ApprovedWidget::ApprovedWidget (ListItem *list, QListWidgetItem *item, QWidget *parent) : QWidget{parent}
+
+ApprovedWidget::ApprovedWidget (ListTask *list, QListWidgetItem *item, QWidget *parent) : QWidget{parent}
 {
+    setMouseTracking(true);
     setFixedHeight(itemHeight);
     setAttribute(Qt::WA_StyledBackground, true);
     setStyleSheet("ApprovedWidget {background: #444; border-radius: 5px;}");

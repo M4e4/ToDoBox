@@ -1,7 +1,7 @@
 #ifndef EDITINGWIDGET_H
 #define EDITINGWIDGET_H
 
-#include "listitem.h"
+#include "listTask.h"
 
 #include <QWidget>
 #include <QListWidget>
@@ -15,7 +15,11 @@ class EditingWidget : public QWidget
 {
     Q_OBJECT
 public:
-    EditingWidget(ListItem *list, QListWidgetItem *item, QWidget* parent = nullptr);
+    EditingWidget(ListTask *list, QListWidgetItem *item, QWidget* parent = nullptr);
 };
+
+
+
+
 
 #endif // EDITINGWIDGET_H
