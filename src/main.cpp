@@ -1,9 +1,8 @@
-#include "frameWidget.h"
-#include "mainWIdget.h"
+#include "mainWidget.h"
+#include "backgroundWidget.h"
 
 #include <QApplication>
 #include <QVBoxLayout>
-#include <QGraphicsDropShadowEffect>
 #include <QSettings>
 #include <QTimer>
 #include <QFontDatabase>
@@ -16,10 +15,9 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    FrameWidget* frameWidget {new FrameWidget};
-    QVBoxLayout* mainVLayout {new QVBoxLayout(frameWidget)};
     MainWidget* mainWidget {new MainWidget};
-    QGraphicsDropShadowEffect* shadowEffect {new QGraphicsDropShadowEffect(mainWidget)};
+    QVBoxLayout* backgroundVLayout {new QVBoxLayout(mainWidget)};
+    BackgroundWidget* backgroundWidget {new BackgroundWidget(mainWidget)};
 
     QSettings settings(QSettings::NativeFormat, QSettings::UserScope, "M4e4", "ToDoBox");
     QVariant size {settings.value("window/window_size")};
@@ -43,34 +41,24 @@ int main(int argc, char *argv[])
     // Load settings.
     if (size.isValid())
     {
-        frameWidget->resize(size.toSize());
-        frameWidget->updateNormalSize();
+        mainWidget->resize(size.toSize());
+        mainWidget->updateNormalSize();
     }
     else
     {
-        frameWidget->resize(600,600);
-        frameWidget->updateNormalSize();
+        mainWidget->resize(600,600);
+        mainWidget->updateNormalSize();
     }
 
-    // Setup window.
-    frameWidget->setWindowFlags(Qt::FramelessWindowHint);
-    frameWidget->setAttribute(Qt::WA_TranslucentBackground);
+    backgroundVLayout->setContentsMargins(20,20,20,20);
+    backgroundVLayout->addWidget(backgroundWidget);
 
-    mainVLayout->setContentsMargins(20,20,20,20);
-    mainVLayout->addWidget(mainWidget);
-
-    shadowEffect->setBlurRadius(20);
-    shadowEffect->setColor(QColor(255,255,255,255));
-    shadowEffect->setOffset(0);
-
-    mainWidget->setGraphicsEffect(shadowEffect);
-
-    frameWidget->show();
+    mainWidget->show();
 
     // Save settings.
-    QObject::connect(&app, &QApplication::aboutToQuit, frameWidget, [&settings, frameWidget]()
+    QObject::connect(&app, &QApplication::aboutToQuit, mainWidget, [&settings, mainWidget]()
     {
-        settings.setValue("window/window_size", frameWidget->getNormalSize());
+        settings.setValue("window/window_size", mainWidget->getNormalSize());
     });
 
     return app.exec();

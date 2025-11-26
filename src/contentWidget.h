@@ -3,8 +3,9 @@
 
 #include <QWidget>
 
-#include "ui/contentWidgetUI.h"
-#include "manager/contentWidgetManager.h"
+#include "model/TaskListModel.h"
+#include "view/contentWidgetView.h"
+#include "controller/contentWidgetController.h"
 
 
 
@@ -17,8 +18,9 @@ public:
     ContentWidget(QWidget* parent = nullptr);
 
 private:
-    ContentWidgetUI* ui;
-    ContentWidgetManager* manager;
+    ContentWidgetModel* model;
+    ContentWidgetView* view;
+    ContentWidgetController* controller;
 };
 
 

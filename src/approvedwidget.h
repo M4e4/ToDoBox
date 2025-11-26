@@ -1,7 +1,7 @@
 #ifndef APPROVEDWIDGET_H
 #define APPROVEDWIDGET_H
 
-#include "listTask.h"
+#include "taskList.h"
 
 #include <QWidget>
 #include <QListWidgetItem>
@@ -14,7 +14,7 @@ class ApprovedWidget : public QWidget
 {
     Q_OBJECT
 public:
-    ApprovedWidget(ListTask* list, QListWidgetItem* item, QWidget* parent = nullptr);
+    ApprovedWidget(TaskList* list, QListWidgetItem* item, QWidget* parent = nullptr);
 };
 
 

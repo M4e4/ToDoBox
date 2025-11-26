@@ -14,21 +14,33 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 add_executable(ToDoBox
     Resources.qrc
+
     src/main.cpp
-    src/frameWidget.h src/frameWidget.cpp
-    src/mainWidget.h src/mainWidget.cpp
-    src/titleWidget.h src/titleWidget.cpp
-    src/listTask.h src/listTask.cpp
-    src/editingwidget.h src/editingwidget.cpp
-    src/approvedwidget.h src/approvedwidget.cpp
-    src/ui/contentWidgetUI.h src/ui/contentWidgetUI.cpp
-    src/manager/contentWidgetManager.h src/manager/contentWidgetManager.cpp
-    src/ui/titleWidgetUI.h src/ui/titleWidgetUI.cpp
-    src/manager/titleWidgetManager.h src/manager/titleWidgetManager.cpp
-    src/contentWidget.h src/contentWidget.cpp
-    src/ui/mainWidgetUI.h src/ui/mainWidgetUI.cpp
-    src/manager/mainWidgetManager.h src/manager/mainWidgetManager.cpp
-    src/utils/toInt.h
+
+    src/view/taskListView.h                     src/view/taskListView.cpp
+    src/view/backgroundWidgetView.h             src/view/backgroundWidgetView.cpp
+    src/view/titleWidgetView.h                  src/view/titleWidgetView.cpp
+    src/view/contentWidgetView.h                src/view/contentWidgetView.cpp
+
+    src/model/taskListModel.h                   src/model/taskListModel.cpp
+    src/model/task.h                            src/model/task.cpp
+
+    src/controller/taskListController.h         src/controller/taskListController.cpp
+    src/controller/backgroundWidgetController.h src/controller/backgroundWidgetController.cpp
+    src/controller/titleWidgetController.h      src/controller/titleWidgetController.cpp
+    src/controller/contentWidgetController.h    src/controller/contentWidgetController.cpp
+
+    src/backgroundWidget.h                      src/backgroundWidget.cpp
+    src/titleWidget.h                           src/titleWidget.cpp
+    src/taskList.h                              src/taskList.cpp
+    src/contentWidget.h                         src/contentWidget.cpp
+    src/editingwidget.h                         src/editingwidget.cpp
+    src/approvedwidget.h                        src/approvedwidget.cpp
+    src/mainWidget.h                            src/mainWidget.cpp
+
+    src/utils/utils.h
+    src/model/contentWidgetModel.h src/model/contentWidgetModel.cpp
+    src/model/taskListProxyModel.h src/model/taskListProxyModel.cpp
 )
 
 if (WIN32)

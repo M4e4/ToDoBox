@@ -3,8 +3,8 @@
 
 #include <QWidget>
 
-#include "ui/titleWidgetUI.h"
-#include "manager/titleWidgetManager.h"
+#include "view/titleWidgetView.h"
+#include "controller/titleWidgetController.h"
 
 
 
@@ -17,8 +17,8 @@ public:
     TitleWidget(QWidget* parent = nullptr);
 
 private:
-    TitleWidgetUI* ui;
-    TitleWidgetManager* manager;
+    TitleWidgetView* view;
+    TitleWidgetController* controller;
 
 signals:
     void clickedMaximize();

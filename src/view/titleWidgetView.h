@@ -1,28 +1,31 @@
-#ifndef TITLEWIDGETUI_H
-#define TITLEWIDGETUI_H
+#ifndef TITLEWIDGETVIEW_H
+#define TITLEWIDGETVIEW_H
 
 #include <QWidget>
 #include <QPushButton>
+#include <QMouseEvent>
 
 
 
 
 
-class TitleWidgetUI : public QWidget
+class TitleWidgetView : public QWidget
 {
     Q_OBJECT
 public:
-    TitleWidgetUI(QWidget* parent = nullptr);
+    TitleWidgetView(QWidget* parent = nullptr);
 
 public:
     QPushButton* bClose;
 
 private:
-    void setupUI();
+    void setupView();
     void mouseDoubleClickEvent(QMouseEvent* event) override;
 
+public slots:
+    void setMaximizeStyle(bool maximize);
+
 signals:
-    void clickedMouseDoubleClickEvent(QMouseEvent* event);
     void clickedMinimize();
     void clickedMaximize();
     void clickedClose();
@@ -32,4 +35,4 @@ signals:
 
 
 
-#endif // TITLEWIDGETUI_H
+#endif // TITLEWIDGETVIEW_H
