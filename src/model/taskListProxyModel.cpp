@@ -1,5 +1,4 @@
 #include "taskListProxyModel.h"
-
 #include "../utils/utils.h"
 
 
@@ -9,7 +8,7 @@
 TaskListProxyModel::TaskListProxyModel(QObject *parent)
     :   QSortFilterProxyModel{parent}
 {
-    setFilterCaseSensitivity(Qt::CaseInsensitive); //???
+
 }
 
 
@@ -47,7 +46,7 @@ bool TaskListProxyModel::filterAcceptsRow(int row, const QModelIndex &parent) co
 {
     QModelIndex item {sourceModel()->index(row, 0, parent)};
     QString title {sourceModel()->data(item, toInt(Role::TITLE)).toString()};
-    Status status {static_cast<Status>(sourceModel()->data(item, toInt(Role::B_STATUS)).toInt())};
+    Status status {static_cast<Status>(sourceModel()->data(item, toInt(Role::F_STATUS)).toInt())};
 
     if (!filterText.isEmpty() && !title.contains(filterText, Qt::CaseInsensitive))
     {

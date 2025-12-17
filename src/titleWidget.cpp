@@ -15,7 +15,6 @@ TitleWidget::TitleWidget(QWidget *parent)
         controller{new TitleWidgetController(view, this)}
 {
     setMouseTracking(true);
-
     setLayout(new QVBoxLayout(this));
 
     layout()->setContentsMargins(0,0,0,0);

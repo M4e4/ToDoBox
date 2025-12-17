@@ -8,24 +8,25 @@
 
 
 
-enum class Status
-{
-    ACTUAL,
-    OVERDUE,
-    QUEUE,
-    COMPLETE
-};
-
-
-
-
-
 enum class Role
 {
     B_STATUS = Qt::UserRole,
     F_STATUS,
     TITLE,
     DATE,
+    COUNT
+};
+
+
+
+
+
+enum class Status
+{
+    ACTUAL,
+    OVERDUE,
+    QUEUE,
+    COMPLETE,
     COUNT
 };
 

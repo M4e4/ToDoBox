@@ -38,6 +38,7 @@ ResizeRegion MainWidget::getRegion(const QPoint &pos)
     if (top && right) return ResizeRegion::TOPRIGHT;
     if (bot && left)  return ResizeRegion::BOTTOMLEFT;
     if (bot && right) return ResizeRegion::BOTTOMRIGHT;
+
     if (left)  return ResizeRegion::LEFT;
     if (right) return ResizeRegion::RIGHT;
     if (top)   return ResizeRegion::TOP;

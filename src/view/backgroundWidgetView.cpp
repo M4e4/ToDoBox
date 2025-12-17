@@ -14,7 +14,9 @@
 
 
 BackgroundWidgetView::BackgroundWidgetView(QWidget *parent)
-    :   QWidget{parent}
+    :   QWidget{parent},
+        title{new TitleWidget(this)},
+        content{new ContentWidget(this)}
 {
     setupView();
 }
@@ -29,15 +31,11 @@ void BackgroundWidgetView::setupView()
     setFocusPolicy(Qt::NoFocus);
     setAttribute(Qt::WA_StyledBackground, true);
     setStyleSheet("BackgroundWidgetView {background: #2a2a2a; border-radius: 10px;}");
-
-    title = new TitleWidget(this);
-    content = new ContentWidget(this);
-
     setLayout(new QVBoxLayout(this));
 
     layout()->setContentsMargins(0,0,0,0);
-
     layout()->addWidget(title);
+    layout()->setSpacing(0);
     layout()->addWidget(content);
 }
 

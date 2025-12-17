@@ -5,7 +5,7 @@
 // #include <QListWidgetItem>
 // #include <QDate>
 // #include <QVector>
-// #include <QVBoxLayout>
+#include <QVBoxLayout>
 // #include <QFile>
 // #include <QTimer>
 // #include <QScrollBar>
@@ -22,7 +22,10 @@ TaskList::TaskList(QWidget *parent)
         view{new TaskListView(this)},
         controller{new TaskListController(model, view, this)}
 {
+    setLayout(new QVBoxLayout(this));
 
+    layout()->setContentsMargins(0,0,0,0);
+    layout()->addWidget(view);
 }
 
 //     : icons

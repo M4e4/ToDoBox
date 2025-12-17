@@ -9,7 +9,10 @@
 TaskListModel::TaskListModel(QObject* parent)
     :   QAbstractListModel{parent}
 {
-
+    addTask("New task 1");
+    addTask("New task 2");
+    addTask("New task 3");
+    addTask("New task WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
 }
 
 
@@ -122,9 +125,9 @@ Qt::ItemFlags TaskListModel::flags(const QModelIndex &index) const
         return Qt::NoItemFlags;
     }
 
-    return Qt::ItemIsEnabled |
-           Qt::ItemIsSelectable |
-           Qt::ItemIsEditable;
+    return  QAbstractListModel::flags(index) |
+            Qt::ItemIsDragEnabled |
+            Qt::ItemIsDropEnabled;
 }
 
 

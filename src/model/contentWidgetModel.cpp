@@ -2,7 +2,7 @@
 
 ContentWidgetModel::ContentWidgetModel(QObject* parent)
     :   QObject{parent},
-        taskListModel{new TaskListModel()}
+        taskListModel{new TaskListModel(this)}
 {
 
 }

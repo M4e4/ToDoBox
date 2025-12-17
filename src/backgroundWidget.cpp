@@ -23,11 +23,11 @@ BackgroundWidget::BackgroundWidget(QWidget *parent)
     layout()->setContentsMargins(0,0,0,0);
     layout()->addWidget(view);
 
-    // QGraphicsDropShadowEffect* shadowEffect {new QGraphicsDropShadowEffect(this)};
+    QGraphicsDropShadowEffect* shadowEffect {new QGraphicsDropShadowEffect(this)};
 
-    // shadowEffect->setBlurRadius(20);
-    // shadowEffect->setColor(QColor(255,255,255,255));
-    // shadowEffect->setOffset(0);
+    shadowEffect->setBlurRadius(20);
+    shadowEffect->setColor(QColor(255,255,255,255));
+    shadowEffect->setOffset(0);
 
-    // setGraphicsEffect(shadowEffect);
+    setGraphicsEffect(shadowEffect);
 }

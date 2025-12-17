@@ -38,9 +38,10 @@ add_executable(ToDoBox
     src/approvedwidget.h                        src/approvedwidget.cpp
     src/mainWidget.h                            src/mainWidget.cpp
 
+    src/model/contentWidgetModel.h              src/model/contentWidgetModel.cpp
+    src/model/taskListProxyModel.h              src/model/taskListProxyModel.cpp
+    src/view/taskDelegate.h                     src/view/taskDelegate.cpp
     src/utils/utils.h
-    src/model/contentWidgetModel.h src/model/contentWidgetModel.cpp
-    src/model/taskListProxyModel.h src/model/taskListProxyModel.cpp
 )
 
 if (WIN32)
